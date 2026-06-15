@@ -1407,13 +1407,28 @@ function cerrarModalEscribir() {
 
 function guardarMsgNovia() {
     const msg = document.getElementById('textarea-msg-novia').value.trim();
-    if (!msg) { alert("¡Escribe algo primero! 💕"); return; }
+    if (!msg) { alert("¡Escribe algo primero! ❤️‍🩹"); return; }
     const fecha = new Date().toLocaleString('es-CO', { hour12: true, day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+    
+    // Guarda el mensaje localmente en el celular de ella
     localStorage.setItem("msg_novia", msg);
     localStorage.setItem("msg_novia_fecha", fecha);
+    
     cerrarModalEscribir();
     renderMsgNovia();
-    alert("¡Mensaje enviado con todo mi amor! 💕❤️‍🩹");
+    
+    // 🚨 PON AQUÍ TU NÚMERO DE CELULAR REAL 🚨
+    // Cambia los números de abajo por tu celular. Deja el 57 de Colombia quieto.
+    // Todo pegado, sin espacios, sin guiones, sin el signo "+".
+    const tuNumeroTelefono = "573209312883"; 
+    
+    // Genera el texto automático para el chat
+    const textoWhatsApp = encodeURIComponent(`¡Hola mi amor! Te dejé una cartita en la app de San Valentín ❤️‍🩹\n\nFecha: ${fecha}\n\n"${msg}"`);
+    
+    alert("¡Mensaje guardado en la app! Ahora se abrirá WhatsApp para enviárselo a Joel automáticamente ❤️‍🩹");
+    
+    // Abre el WhatsApp de tu novia directo a tu chat con el texto listo
+    window.open(`https://wa.me/${tuNumeroTelefono}?text=${textoWhatsApp}`, '_blank');
 }
 
 function renderMsgNovia() {
@@ -1423,11 +1438,39 @@ function renderMsgNovia() {
     const fechaDiv = document.getElementById('msg-novia-fecha');
     if (msg) {
         caja.textContent = msg;
-        fechaDiv.innerHTML = fecha ? `<span class="from-badge">💌 Tu reina escribió esto · ${fecha}</span>` : '';
+        fechaDiv.innerHTML = fecha ? `<span class="from-badge">❤️‍🩹 Tu reina escribió esto · ${fecha}</span>` : '';
     } else {
-        caja.textContent = "Tu reina aún no ha escrito nada... ¡pero pronto llegará su mensaje! 💕";
+        caja.textContent = "Tu reina aún no ha escrito nada... ¡pero pronto llegará su mensaje! ❤️‍🩹";
         fechaDiv.innerHTML = '';
     }
+}
+
+function guardarMsgJoel() {
+    // 1. Buscamos el texto que escribiste en la casilla de abajo
+    const textareaJoel = document.getElementById('textarea-msg-rapido') || document.querySelector('textarea'); 
+    const msg = textareaJoel.value.trim();
+    
+    if (!msg) { alert("¡Escribe algo primero para tu reina! ❤️‍🩹"); return; }
+    const fecha = new Date().toLocaleString('es-CO', { hour12: true, day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+    
+    // Lo guarda en tu celular para que no se te borre de la pantalla
+    localStorage.setItem("msg_joel", msg);
+    localStorage.setItem("msg_joel_fecha", fecha);
+    
+    // 🚨 EL CAMBIO CLAVE: Aquí pones el número de celular de TU NOVIA 🚨
+    // Deja el 57 de Colombia y pon sus 10 dígitos pegados, sin espacios.
+    const numeroDeElla = "573244212293"; 
+    
+    // Armamos el texto para el WhatsApp de ella
+    const textoWhatsApp = encodeURIComponent(`¡Hola mi amor! Te dejé un mensajito en nuestra app ❤️‍🩹\n\nFecha: ${fecha}\n\n"${msg}"`);
+    
+    alert("¡Mensaje guardado! Ahora se abrirá WhatsApp para enviárselo a tu reina automáticamente ❤️‍🩹");
+    
+    // Abre tu WhatsApp directo al chat de ella con el texto listo para enviar
+    window.open(`https://wa.me/${numeroDeElla}?text=${textoWhatsApp}`, '_blank');
+    
+    // Limpia tu casilla para el próximo mensaje
+    textareaJoel.value = "";
 }
 
 // ── TITLE ANIMATION ──

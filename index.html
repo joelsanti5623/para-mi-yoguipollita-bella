@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Mi Reina Hermosa ❤️‍🩹</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@600;700&display=swap');
+
+        :root {
+            --bg: #fff0f5;
+            --accent: #e91e8c;
+            --accent2: #ff6fa8;
+            --accent-hover: #c0176e;
+            --text: #4a0030;
+            --card: #ffffff;
+            --border: #ffb3d1;
+            --soft: #fff5f9;
+            --tab-inactive: #fce4ec;
+            --shadow: rgba(233,30,140,0.13);
+        }
+
+        body.dark {
+            --bg: #1e0f18;
+            --accent: #ff6fa8;
+            --accent2: #ff9ebe;
+            --accent-hover: #ff9ebe;
+            --text: #ffe0ef;
+            --card: #2d1525;
+            --border: #5c2d47;
+            --soft: #251020;
+            --tab-inactive: #3a1a2e;
+            --shadow: rgba(255,111,168,0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+            overscroll-behavior: none;
+        }
+
+        .topbar {
+            background: var(--card);
+            border-bottom: 2px solid var(--border);
+            padding: 12px 16px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .topbar-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .topbar-controls {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ctrl-btn {
+            background: var(--tab-inactive);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ctrl-btn:active { transform: scale(0.95); background: var(--accent); color: white; }
+
+        .tab-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 6px;
+            padding: 10px 14px;
+            background: var(--card);
+            border-bottom: 1.5px solid var(--border);
+            scrollbar-width: none;
+        }
+        .tab-scroll::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            flex-shrink: 0;
+            background: var(--tab-inactive);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        .tab-btn:active { transform: scale(0.95); }
+
+        .content {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .card {
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 3px 15px var(--shadow);
+        }
+
+        .card-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .display-box {
+            background: var(--soft);
+            border: 1.5px dashed var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 16px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .btn:active { transform: scale(0.97); background: var(--accent-hover); }
+        .btn.secondary { background: var(--accent2); }
+        .btn.small { padding: 9px 14px; font-size: 13px; width: auto; border-radius: 20px; margin-top: 0; }
+        .btn.danger { background: #ff4d6d; }
+
+        input[type="text"], input[type="date"], input[type="password"], textarea, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            background: var(--soft);
+            color: var(--text);
+            font-size: 14px;
+            font-family: 'Nunito', sans-serif;
+            margin-top: 8px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            margin-top: 8px;
+        }
+        .input-row input { margin-top: 0; flex: 1; }
+
+        .days-big {
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1;
+            font-family: 'Dancing Script', cursive;
+        }
+        .days-sub {
+            text-align: center;
+            font-weight: 700;
+            color: var(--accent2);
+            font-size: 15px;
+            margin-top: 6px;
+        }
+
+        /* ── FOTOS: GRID MEJORADO ── */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .photo-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: var(--soft);
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .photo-item:active img { transform: scale(0.97); }
+        .photo-del {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(233,30,140,0.85);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* ── LIGHTBOX ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 85vh;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .lightbox-nav {
+            display: flex;
+            gap: 16px;
+            margin-top: 14px;
+        }
+        .lightbox-nav button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 22px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ── UPLOAD AREA ── */
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: var(--soft);
+            cursor: pointer;
+            transition: border-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .upload-area:active { border-color: var(--accent); }
+        .upload-area .upload-icon { font-size: 32px; margin-bottom: 6px; }
+        .upload-area p { font-size: 13px; color: var(--text); opacity: 0.7; }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--soft);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 13px;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+        .list-item span { font-size: 14px; flex: 1; }
+        .list-del {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 4px;
+            font-weight: bold;
+        }
+
+        .dice-wrap { display: flex; justify-content: center; margin: 16px 0; }
+        .dice {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            color: white;
+            font-size: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px var(--shadow);
+            transition: transform 0.1s;
+        }
+
+        /* ── OUTFITS MEJORADO ── */
+        .outfit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .outfit-card {
+            border: 2px dashed var(--border);
+            border-radius: 14px;
+            padding: 10px;
+            text-align: center;
+            background: var(--soft);
+            position: relative;
+        }
+        .outfit-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .outfit-label {
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 6px;
+            color: var(--text);
+        }
+        .outfit-add-btn {
+            position: absolute;
+            bottom: 28px;
+            right: 6px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px; height: 28px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        /* ── YOUTUBE ── */
+        .yt-frame {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            display: none;
+            border-radius: 0 0 14px 14px;
+        }
+        .song-card.open .yt-frame { display: block; }
+        .song-card {
+            background: var(--soft);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .song-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            gap: 10px;
+        }
+        .song-card-header .song-info { flex: 1; min-width: 0; }
+        .song-card-header .song-title {
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .song-card-header .song-sub {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 2px;
+        }
+        .song-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+        .play-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mood-box {
+            background: linear-gradient(135deg, #ffe0ef, #ffd6e8);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #721c24;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        body.dark .mood-box { background: linear-gradient(135deg, #3a1020, #2d0e1a); color: #ffb3d1; }
+
+        footer {
+            text-align: center;
+            padding: 20px 16px 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 15px;
+            color: var(--accent2);
+            opacity: 0.8;
+        }
+
+        .wardrobe-list {
+            max-height: 120px;
+            overflow-y: auto;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin: 10px 0;
+            background: var(--soft);
+        }
+        .wardrobe-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+        .wardrobe-item:last-child { border-bottom: none; }
+
+        .carta-view {
+            line-height: 1.8;
+            font-style: italic;
+            white-space: pre-line;
+            background: var(--soft);
+            padding: 18px;
+            border: 1.5px dashed var(--border);
+            border-radius: 14px;
+            min-height: 100px;
+            font-size: 15px;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--text);
+            opacity: 0.5;
+            font-size: 13px;
+            padding: 16px 0;
+        }
+
+        .meta-item {
+            background: var(--soft);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .meta-info { flex: 1; min-width: 0; }
+        .meta-name { font-weight: 700; font-size: 14px; }
+        .meta-days { font-size: 12px; color: var(--accent); margin-top: 3px; }
+
+        .list-scroll {
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 2px;
+        }
+
+        /* ── MENSAJE COMPARTIDO ── */
+        .shared-msg-box {
+            background: linear-gradient(135deg, #ffe0ef, #ffd0e8);
+            border: 2px solid var(--accent);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #880044;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+            margin-bottom: 12px;
+        }
+        body.dark .shared-msg-box {
+            background: linear-gradient(135deg, #3a1020, #2d0e1a);
+            color: #ffb3d1;
+        }
+        .msg-from {
+            text-align: center;
+            font-size: 12px;
+            color: var(--accent2);
+            margin-top: -8px;
+            margin-bottom: 12px;
+        }
+
+        /* ── PIN MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.6);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            padding: 24px 20px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+        .modal-box h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent);
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .modal-box p { font-size: 13px; opacity: 0.7; margin-bottom: 8px; }
+
+        /* ── SPOTIFY HELPER TEXT ── */
+        .spotify-help {
+            background: #1DB954;
+            color: white;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* Tag de quién envió */
+        .from-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-title" id="app-title">❤️‍🩹 Para Mi Reina Hermosa ❤️‍🩹</div>
+    <div class="topbar-controls">
+        <button class="ctrl-btn" onclick="siguientePestana()">⏭️ Sig.</button>
+        <button class="ctrl-btn" onclick="toggleDark()">🌙 Tema</button>
+    </div>
+</div>
+
+<!-- LIGHTBOX para fotos -->
+<div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
+    <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="foto">
+    <div class="lightbox-nav" onclick="event.stopPropagation()">
+        <button onclick="navLightbox(-1)">‹</button>
+        <button onclick="navLightbox(1)">›</button>
+    </div>
+</div>
+
+<!-- PIN MODAL para escribir mensaje -->
+<div class="modal-overlay" id="modal-pin">
+    <div class="modal-box">
+        <h3>✍️ Modo Novia</h3>
+        <p>Ingresa el PIN para escribir tu mensaje de amor:</p>
+        <input type="password" id="input-pin" placeholder="PIN de 4 dígitos" maxlength="4" style="text-align:center; font-size:20px; letter-spacing:6px;">
+        <button class="btn" style="margin-top:12px;" onclick="verificarPin()">💕 Entrar</button>
+        <button class="btn danger" style="margin-top:8px;" onclick="cerrarModal()">Cancelar</button>
+    </div>
+</div>
+
+<!-- MODAL ESCRIBIR MENSAJE NOVIA -->
+<div class="modal-overlay" id="modal-escribir">
+    <div class="modal-box">
+        <h3>💌 Tu mensaje para él</h3>
+        <p>Escribe algo bonito y él lo verá cada vez que abra la app ❤️</p>
+        <textarea id="textarea-msg-novia" rows="4" placeholder="Mi amor, hoy quiero que sepas que..."></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="guardarMsgNovia()">💕 Enviar con amor</button>
+        <button class="btn danger" style="margin-top:8px;" onclick="cerrarModalEscribir()">Cancelar</button>
+    </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-scroll" id="tab-nav">
+    <button class="tab-btn active" onclick="irA('mensajes', this)">📯 Mensajes</button>
+    <button class="tab-btn" onclick="irA('carta', this)">💍 Carta</button>
+    <button class="tab-btn" onclick="irA('diario', this)">📖 Diario</button>
+    <button class="tab-btn" onclick="irA('dias', this)">📅 Días</button>
+    <button class="tab-btn" onclick="irA('cuenta', this)">⏳ Cuenta</button>
+    <button class="tab-btn" onclick="irA('fotos', this)">🖼️ Fotos</button>
+    <button class="tab-btn" onclick="irA('outfits', this)">👗 Outfits</button>
+    <button class="tab-btn" onclick="irA('ruleta', this)">🎡 Ruleta</button>
+    <button class="tab-btn" onclick="irA('vor', this)">🎲 V o R</button>
+    <button class="tab-btn" onclick="irA('deseos', this)">🧜 Deseos</button>
+    <button class="tab-btn" onclick="irA('momentos', this)">🍿 Momentos</button>
+    <button class="tab-btn" onclick="irA('canciones', this)">🎵 Canciones</button>
+    <button class="tab-btn" onclick="irA('animo', this)">☯️ Ánimo</button>
+    <button class="tab-btn" onclick="irA('besos', this)">💋 Besos</button>
+    <button class="tab-btn" onclick="irA('sorpresa', this)">🎁 Sorpresa</button>
+</div>
+
+<div class="content">
+
+    <!-- 1. MENSAJES -->
+    <div class="tab-panel active" id="mensajes">
+        <!-- Mensaje de la novia -->
+        <div class="card">
+            <div class="card-title">💌 Mensaje de tu Reina</div>
+            <div class="shared-msg-box" id="display-msg-novia">Cargando mensaje de amor... 💕</div>
+            <div class="msg-from" id="msg-novia-fecha"></div>
+            <button class="btn secondary" onclick="abrirModalPin()">✍️ Soy tu novia — quiero escribirte algo</button>
+        </div>
+        <!-- Mensajes automáticos -->
+        <div class="card">
+            <p style="text-align:center; font-size:14px; opacity:0.8; margin-bottom:10px;">Un mensaje para ti:</p>
+            <div class="display-box" id="caja-mensajes">Cada día contigo es mi favorito ❤️‍🩹</div>
+            <button class="btn" onclick="rotarMensaje()">✨ Otro mensaje</button>
+        </div>
+        <div class="card">
+            <p style="font-size:14px; font-weight:700; margin-bottom:4px;">Escríbele algo especial:</p>
+            <textarea id="input-texto-rapido" rows="3" placeholder="Escribe aquí un pensamiento rápido..."></textarea>
+            <button class="btn secondary" onclick="guardarAlDiario()">❤️‍🩹 Guardar en diario</button>
+        </div>
+    </div>
+
+    <!-- 2. CARTA -->
+    <div class="tab-panel" id="carta">
+        <div class="card">
+            <div class="card-title">Mi Carta de Amor 📜</div>
+            <div class="carta-view" id="vista-carta"></div>
+        </div>
+        <div class="card">
+            <p style="font-size:13px; font-weight:700; margin-bottom:4px;">✍️ Actualizar carta:</p>
+            <textarea id="textarea-carta" rows="6" placeholder="Escribe la carta de hoy para tu reina..."></textarea>
+            <button class="btn" onclick="guardarCarta()">💍 Guardar Carta</button>
+        </div>
+    </div>
+
+    <!-- 3. DIARIO -->
+    <div class="tab-panel" id="diario">
+        <div class="card">
+            <div class="card-title">Nuestro Diario ❤️‍🩹</div>
+            <div id="visor-diario" style="max-height:300px; overflow-y:auto; font-size:14px; line-height:1.7; white-space:pre-line; background:var(--soft); padding:14px; border-radius:12px; border:1.5px solid var(--border);"></div>
+            <button class="btn danger" style="margin-top:12px;" onclick="limpiarDiario()">🔄 Reiniciar Diario</button>
+        </div>
+    </div>
+
+    <!-- 4. DÍAS -->
+    <div class="tab-panel" id="dias">
+        <div class="card" style="text-align:center;">
+            <div class="card-title">Llevamos juntos:</div>
+            <div class="days-big" id="lbl-dias">0</div>
+            <p style="font-size:14px; margin-top:6px; font-weight:700; color:var(--accent2);">días</p>
+            <div class="days-sub" id="lbl-desglose">0 años · 0 meses · 0 días</div>
+            <p style="font-size:13px; margin-top:14px; opacity:0.7;">Desde el 18/08/2024 hasta hoy.<br>¡Cada día contigo es un regalo! 🎁</p>
+        </div>
+    </div>
+
+    <!-- 5. CUENTA -->
+    <div class="tab-panel" id="cuenta">
+        <div class="card">
+            <div class="card-title">⏳ Cuentas Regresivas</div>
+            <input type="text" id="input-meta-nombre" placeholder="Ej: Nuestro próximo viaje ✈️">
+            <input type="date" id="input-meta-fecha" style="margin-top:8px;">
+            <button class="btn" onclick="agregarMeta()">📅 Añadir Meta</button>
+        </div>
+        <div class="list-scroll" id="lista-metas"></div>
+    </div>
+
+    <!-- 6. FOTOS — Galería mejorada -->
+    <div class="tab-panel" id="fotos">
+        <div class="card">
+            <div class="card-title">Álbum de Recuerdos 📸</div>
+            <!-- Botón grande, tap directo, sin texto extra -->
+            <div class="upload-area" id="foto-upload-area" onclick="document.getElementById('input-fotos').click()">
+                <div class="upload-icon">📷</div>
+                <p style="font-size:15px; font-weight:700; opacity:1;">Toca aquí para agregar fotos</p>
+                <p style="margin-top:4px; font-size:12px;">Selecciona varias a la vez desde tu galería</p>
+            </div>
+            <input type="file" id="input-fotos" accept="image/*" multiple capture style="display:none" onchange="agregarFotos()">
+            <div id="fotos-count" style="text-align:center; font-size:13px; color:var(--accent); margin-top:8px; font-weight:700;"></div>
+        </div>
+        <div class="photo-grid" id="galeria"></div>
+    </div>
+
+    <!-- 7. OUTFITS — Carga directa por categoría -->
+    <div class="tab-panel" id="outfits">
+        <div class="card">
+            <div class="card-title">Armador de Outfits 👗✨</div>
+            <p style="font-size:13px; opacity:0.8; margin-bottom:8px; text-align:center;">Toca el <b>+</b> en cada categoría para agregar una prenda:</p>
+            <div class="wardrobe-list" id="log-armario"><p class="empty">Armario vacío 👗</p></div>
+            <button class="btn" onclick="armarOutfit()">✨ ¡Armar outfit aleatorio!</button>
+        </div>
+        <div class="outfit-grid">
+            <div class="outfit-card">
+                <img id="slot-arriba" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect fill='%23fff0f5' width='100' height='100'/><text y='65' x='50' font-size='45' text-anchor='middle'>👕</text></svg>">
+                <div class="outfit-label">Superior</div>
+                <button class="outfit-add-btn" onclick="seleccionarPrenda('arriba')">+</button>
+            </div>
+            <div class="outfit-card">
+                <img id="slot-abajo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect fill='%23fff0f5' width='100' height='100'/><text y='65' x='50' font-size='45' text-anchor='middle'>👖</text></svg>">
+                <div class="outfit-label">Inferior</div>
+                <button class="outfit-add-btn" onclick="seleccionarPrenda('abajo')">+</button>
+            </div>
+            <div class="outfit-card">
+                <img id="slot-zapatos" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect fill='%23fff0f5' width='100' height='100'/><text y='65' x='50' font-size='45' text-anchor='middle'>👟</text></svg>">
+                <div class="outfit-label">Calzado</div>
+                <button class="outfit-add-btn" onclick="seleccionarPrenda('zapatos')">+</button>
+            </div>
+            <div class="outfit-card">
+                <img id="slot-accesorio" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect fill='%23fff0f5' width='100' height='100'/><text y='65' x='50' font-size='45' text-anchor='middle'>👜</text></svg>">
+                <div class="outfit-label">Accesorio</div>
+                <button class="outfit-add-btn" onclick="seleccionarPrenda('accesorio')">+</button>
+            </div>
+        </div>
+        <!-- Input oculto para prendas -->
+        <input type="file" id="input-prenda" accept="image/*" style="display:none" onchange="agregarPrenda()">
+    </div>
+
+    <!-- 8. RULETA -->
+    <div class="tab-panel" id="ruleta">
+        <div class="card">
+            <div class="card-title">🎡 Ruleta de Planes</div>
+            <div class="input-row">
+                <input type="text" id="input-ruleta" placeholder="Ej: Noche de películas 🎬">
+                <button class="btn small" onclick="agregarLista('ruleta')">+ Añadir</button>
+            </div>
+            <div class="list-scroll" style="max-height:160px; margin-top:10px;" id="lista-ruleta"></div>
+            <div class="display-box" id="resultado-ruleta" style="margin-top:12px; font-weight:700;">¿Qué plan haremos hoy? 🤔</div>
+            <button class="btn" onclick="girarRuleta()">🎰 ¡Girar!</button>
+        </div>
+    </div>
+
+    <!-- 9. V O R -->
+    <div class="tab-panel" id="vor">
+        <div class="card">
+            <div class="card-title">🎲 Verdad o Reto</div>
+            <div class="display-box" id="caja-vor" style="min-height:80px; font-size:15px;">¡Elige una opción para desafiarnos! 👇</div>
+            <div style="display:flex; gap:10px; margin-top:12px;">
+                <button class="btn" style="flex:1;" onclick="mostrarVoR('verdad')">🤔 Verdad</button>
+                <button class="btn secondary" style="flex:1;" onclick="mostrarVoR('reto')">🔥 Reto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. DESEOS -->
+    <div class="tab-panel" id="deseos">
+        <div class="card">
+            <div class="card-title">🧜 Lista de Deseos</div>
+            <div class="input-row">
+                <input type="text" id="input-deseos" placeholder="Ej: Viajar a la playa 🌊">
+                <button class="btn small" onclick="agregarLista('deseos')">+ Añadir</button>
+            </div>
+        </div>
+        <div class="list-scroll" id="lista-deseos"></div>
+    </div>
+
+    <!-- 11. MOMENTOS -->
+    <div class="tab-panel" id="momentos">
+        <div class="card">
+            <div class="card-title">🍿 Momentos Inolvidables</div>
+            <div class="input-row">
+                <input type="text" id="input-momentos" placeholder="Ej: Nuestra primera salida 🍦">
+                <button class="btn small" onclick="agregarLista('momentos')">+ Añadir</button>
+            </div>
+        </div>
+        <div class="list-scroll" id="lista-momentos"></div>
+    </div>
+
+    <!-- 12. CANCIONES — YouTube -->
+    <div class="tab-panel" id="canciones">
+        <div class="card">
+            <div class="card-title">🎵 Nuestra Playlist</div>
+            <div class="spotify-help" style="background:#ff0000;">
+                ▶️ Cómo obtener el link de YouTube:<br>
+                Canción → Compartir → Copiar enlace
+            </div>
+            <input type="text" id="input-cancion-nombre" placeholder="Nombre ej: Hasta el amanecer 🎶">
+            <input type="text" id="input-cancion-url" placeholder="Link de YouTube: https://youtube.com/...">
+            <button class="btn" onclick="agregarCancion()">🎵 Añadir a la playlist</button>
+        </div>
+        <div id="lista-canciones-yt"></div>
+    </div>
+
+    <!-- 13. ÁNIMO -->
+    <div class="tab-panel" id="animo">
+        <div class="card">
+            <div class="card-title">☯️ ¿Cómo te sientes hoy?</div>
+            <select id="select-animo" onchange="evaluarAnimo()">
+                <option value="">-- Elige tu estado de ánimo --</option>
+                <option value="feliz">☀️ Feliz y Con Energía</option>
+                <option value="cansada">💤 Cansada o Agotada</option>
+                <option value="triste">🌧️ Un poco Triste</option>
+                <option value="estresada">🔥 Estresada o Preocupada</option>
+                <option value="enamorada">❤️‍🩹 Muy Enamorada</option>
+            </select>
+            <div class="mood-box" id="caja-animo">Selecciona arriba cómo va tu día... ❤️‍🩹</div>
+        </div>
+    </div>
+
+    <!-- 14. BESOS -->
+    <div class="tab-panel" id="besos">
+        <div class="card">
+            <div class="card-title">💋 El Dado de los Besos</div>
+            <p style="text-align:center; font-size:13px; opacity:0.8;">¡Deja que el dado decida el beso!</p>
+            <div class="dice-wrap">
+                <div class="dice" id="dado">🎲</div>
+            </div>
+            <div class="display-box" id="resultado-beso" style="font-weight:700; font-size:17px;">¡Presiona el botón para lanzar!</div>
+            <button class="btn" onclick="lanzarDado()">🎲 Lanzar Dado</button>
+        </div>
+    </div>
+
+    <!-- 15. SORPRESA -->
+    <div class="tab-panel" id="sorpresa">
+        <div class="card">
+            <div class="card-title">🎁 Caja Sorpresa</div>
+            <div class="input-row">
+                <input type="text" id="input-sorpresa" placeholder="Vale por un masaje 💆‍♀️">
+                <button class="btn small" onclick="agregarLista('sorpresa')">+ Añadir</button>
+            </div>
+            <div class="list-scroll" style="max-height:130px; margin-top:10px;" id="lista-sorpresa"></div>
+            <div style="font-size:50px; text-align:center; margin:16px 0;">🎁</div>
+            <div class="display-box" id="resultado-sorpresa" style="font-weight:700; display:none;"></div>
+            <button class="btn" onclick="abrirSorpresa()">🎊 ¡Abrir mi Sorpresa!</button>
+        </div>
+    </div>
+
+</div>
+
+<footer>Creado con amor por Joel Santiago Carreño Vargas ❤️‍🩹</footer>
+
+<script>
+// ── PIN para modo novia ──
+const PIN_CORRECTO = "0818"; // 18 agosto como el aniversario 💕
+
+// ── DATA ──
+const FECHA_ORIGEN = new Date("2024-08-18T00:00:00");
+
+const MENSAJES = [
+    "Cada día contigo es mi favorito 💕",
+    "Eres la razón de mi sonrisa ☀️",
+    "Me haces ser mejor persona 🌸",
+    "Tu risa es mi canción favorita 🎵",
+    "Gracias por existir en mi vida 🌹",
+    "Eres mi lugar favorito en el mundo 🏡",
+    "Te quiero más de lo que las palabras pueden decir 💖",
+    "Contigo el tiempo vuela y aun así quiero más ⏰💕",
+    "Eres exactamente lo que mi corazón necesitaba 🌟"
+];
+
+const VERDADES = [
+    "¿Cuál es tu recuerdo favorito de nosotros dos?",
+    "¿Qué pequeño detalle mío te alegra el día?",
+    "¿Qué pensaste de mí en nuestra primera cita?",
+    "¿Cuál ha sido nuestra mejor salida?",
+    "¿Cuál es la cosa que más admiras de mí?",
+    "¿Qué es lo que más te enamora de nuestra relación?"
+];
+
+const RETOS = [
+    "Dale un beso larguísimo en la mejilla ahora mismo 😘",
+    "Dile 3 cosas que te encantan de él mirándolo a los ojos.",
+    "Haz una imitación de cómo habla él cuando está emocionado.",
+    "Dale un abrazo fuerte de 10 segundos sin soltarlo.",
+    "Dile cuál es tu parte favorita de su cuerpo 😏",
+    "Cántale aunque sea un pedacito de su canción favorita 🎶"
+];
+
+const BESOS = [
+    "💋 ¡Beso en la frente! (Tierno y protector)",
+    "💋 ¡Beso Esquimal! (Frotar las narices tiernamente)",
+    "💋 ¡Beso Francés! (Fuego total 🔥)",
+    "💋 ¡Beso Robado! (Sorpréndelo sin que esté mirando)",
+    "💋 ¡Beso en la mejilla con abrazo fuerte!",
+    "💋 ¡7 besos de piquito rápidos seguidos! 😘"
+];
+
+const SORPRESAS_DEF = [
+    "Vale por un masaje relajante completo 💆‍♀️",
+    "Vale por tu comida favorita pagada por mí 🍔",
+    "Vale por una tarde entera de mimos ilimitados 🥰",
+    "Vale por ver la película que tú elijas 🍿"
+];
+
+const CARTA_DEF = `Mi reina hermosa,\n\nEscribo esto porque a veces las palabras en vivo se me quedan cortas para expresar todo lo que causas en mí. Desde que entraste a mi vida, transformaste mis días comunes en momentos llenos de alegría, ilusión y un norte claro.\n\nAmo tu risa, admiro tu forma de ver el mundo, y valoro infinitamente cada segundo que compartimos.\n\nQuiero que este pequeño espacio sea un recordatorio constante de que mi corazón está completamente contigo. Te adoro hoy más que ayer. ❤️‍🩹`;
+
+// ── STATE ──
+let msgIdx = 0;
+let fotos = JSON.parse(localStorage.getItem("fotos2") || "[]");
+let armario = JSON.parse(localStorage.getItem("armario2") || "[]");
+let deseos = JSON.parse(localStorage.getItem("deseos") || "[]");
+let momentos = JSON.parse(localStorage.getItem("momentos") || "[]");
+let ruletaItems = JSON.parse(localStorage.getItem("ruleta") || "[]");
+let metas = JSON.parse(localStorage.getItem("metas") || "[]");
+let sorpresas = JSON.parse(localStorage.getItem("sorpresa") || "[]");
+let cancionesSpotify = JSON.parse(localStorage.getItem("cancionesSpotify") || "[]");
+let lightboxIdx = 0;
+let tipoNuevaPrenda = 'arriba';
+
+// ── NAV ──
+function irA(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function siguientePestana() {
+    const btns = [...document.querySelectorAll('.tab-btn')];
+    const idx = btns.findIndex(b => b.classList.contains('active'));
+    btns[(idx + 1) % btns.length].click();
+}
+
+// ── DARK MODE ──
+function toggleDark() {
+    document.body.classList.toggle('dark');
+    localStorage.setItem("dark", document.body.classList.contains('dark') ? "1" : "0");
+}
+
+// ── MENSAJES ──
+function rotarMensaje() {
+    msgIdx = (msgIdx + 1) % MENSAJES.length;
+    const caja = document.getElementById('caja-mensajes');
+    caja.style.opacity = '0';
+    setTimeout(() => { caja.textContent = MENSAJES[msgIdx]; caja.style.opacity = '1'; }, 200);
+    caja.style.transition = 'opacity 0.2s';
+}
+
+// ── DIARIO ──
+function guardarAlDiario() {
+    const txt = document.getElementById('input-texto-rapido').value.trim();
+    if (!txt) return;
+    let diario = localStorage.getItem("diario") || "";
+    const fecha = new Date().toLocaleString('es-CO', { hour12: true });
+    diario += `\n❤️‍🩹 ${fecha}\n${txt}\n──────────────\n`;
+    localStorage.setItem("diario", diario);
+    document.getElementById('input-texto-rapido').value = "";
+    renderDiario();
+    alert("¡Guardado en el diario! 💕");
+}
+
+function renderDiario() {
+    const datos = localStorage.getItem("diario") || "";
+    const v = document.getElementById('visor-diario');
+    v.textContent = datos.trim() || "Aún no hay mensajes ❤️‍🩹\n¡Escribe algo en Mensajes!";
+    v.scrollTop = v.scrollHeight;
+}
+
+function limpiarDiario() {
+    if (confirm("¿Reiniciar el diario?")) { localStorage.removeItem("diario"); renderDiario(); }
+}
+
+// ── CARTA ──
+function guardarCarta() {
+    const txt = document.getElementById('textarea-carta').value.trim();
+    if (!txt) return;
+    localStorage.setItem("carta", txt);
+    document.getElementById('vista-carta').textContent = txt;
+    alert("¡Carta actualizada! 💍");
+}
+
+// ── DÍAS ──
+function actualizarDias() {
+    const hoy = new Date();
+    const diff = Math.floor((hoy - FECHA_ORIGEN) / 86400000);
+    document.getElementById('lbl-dias').textContent = diff;
+
+    let y = hoy.getFullYear() - FECHA_ORIGEN.getFullYear();
+    let m = hoy.getMonth() - FECHA_ORIGEN.getMonth();
+    let d = hoy.getDate() - FECHA_ORIGEN.getDate();
+    if (d < 0) { m--; d += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate(); }
+    if (m < 0) { y--; m += 12; }
+    document.getElementById('lbl-desglose').textContent = `✨ ${y} año${y!==1?'s':''} · ${m} mes${m!==1?'es':''} · ${d} día${d!==1?'s':''} ✨`;
+}
+
+// ── METAS ──
+function agregarMeta() {
+    const nombre = document.getElementById('input-meta-nombre').value.trim();
+    const fecha = document.getElementById('input-meta-fecha').value;
+    if (!nombre || !fecha) { alert("Pon nombre y fecha 📅"); return; }
+    metas.push({ nombre, fecha });
+    localStorage.setItem("metas", JSON.stringify(metas));
+    document.getElementById('input-meta-nombre').value = "";
+    document.getElementById('input-meta-fecha').value = "";
+    renderMetas();
+}
+
+function eliminarMeta(i) {
+    metas.splice(i, 1);
+    localStorage.setItem("metas", JSON.stringify(metas));
+    renderMetas();
+}
+
+function renderMetas() {
+    const c = document.getElementById('lista-metas');
+    if (!metas.length) { c.innerHTML = '<p class="empty">Sin metas aún. ¡Añade su próximo plan! ✨</p>'; return; }
+    const hoy = new Date(); hoy.setHours(0,0,0,0);
+    c.innerHTML = metas.map((m, i) => {
+        const f = new Date(m.fecha + "T00:00:00");
+        const diff = Math.ceil((f - hoy) / 86400000);
+        const txt = diff === 0 ? "¡ES HOY! 🎉" : diff > 0 ? `Faltan ${diff} días ⏳` : `Pasó hace ${Math.abs(diff)} días ✔️`;
+        return `<div class="meta-item"><div class="meta-info"><div class="meta-name">${m.nombre}</div><div class="meta-days">${m.fecha} · ${txt}</div></div><button class="list-del" onclick="eliminarMeta(${i})">✕</button></div>`;
+    }).join('');
+}
+
+// ── FOTOS — MEJORADO ──
+function agregarFotos() {
+    const inp = document.getElementById('input-fotos');
+    if (!inp.files || !inp.files.length) return;
+    const area = document.getElementById('foto-upload-area');
+    area.innerHTML = '<div class="upload-icon">⏳</div><p>Cargando fotos...</p>';
+    let pending = inp.files.length;
+    Array.from(inp.files).forEach(file => {
+        const r = new FileReader();
+        r.onload = e => {
+            fotos.push(e.target.result);
+            pending--;
+            if (pending === 0) {
+                try { localStorage.setItem("fotos2", JSON.stringify(fotos)); } catch(e) { alert("Galería llena, elimina algunas fotos 📸"); }
+                renderFotos();
+                area.innerHTML = '<div class="upload-icon">📷</div><p style="font-size:15px; font-weight:700; opacity:1;">Toca aquí para agregar fotos</p><p style="margin-top:4px; font-size:12px;">Selecciona varias a la vez desde tu galería</p>';
+            }
+        };
+        r.readAsDataURL(file);
+    });
+    inp.value = "";
+}
+
+function eliminarFoto(i, e) {
+    e.stopPropagation();
+    if (confirm("¿Eliminar esta foto?")) {
+        fotos.splice(i, 1);
+        localStorage.setItem("fotos2", JSON.stringify(fotos));
+        renderFotos();
+    }
+}
+
+function abrirLightbox(i) {
+    lightboxIdx = i;
+    document.getElementById('lightbox-img').src = fotos[i];
+    document.getElementById('lightbox').classList.add('open');
+}
+
+function cerrarLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+function navLightbox(dir) {
+    lightboxIdx = (lightboxIdx + dir + fotos.length) % fotos.length;
+    document.getElementById('lightbox-img').src = fotos[lightboxIdx];
+}
+
+function renderFotos() {
+    const g = document.getElementById('galeria');
+    const cnt = document.getElementById('fotos-count');
+    cnt.textContent = fotos.length ? `📸 ${fotos.length} foto${fotos.length !== 1 ? 's' : ''} en el álbum` : '';
+    if (!fotos.length) { g.innerHTML = ''; return; }
+    g.innerHTML = fotos.map((src, i) => `
+        <div class="photo-item" onclick="abrirLightbox(${i})">
+            <button class="photo-del" onclick="eliminarFoto(${i}, event)">✕</button>
+            <img src="${src}" loading="lazy">
+        </div>
+    `).join('');
+}
+
+// ── OUTFITS — MEJORADO ──
+function seleccionarPrenda(tipo) {
+    tipoNuevaPrenda = tipo;
+    document.getElementById('input-prenda').click();
+}
+
+function agregarPrenda() {
+    const inp = document.getElementById('input-prenda');
+    if (!inp.files || !inp.files[0]) return;
+    const r = new FileReader();
+    r.onload = e => {
+        armario.push({ tipo: tipoNuevaPrenda, data: e.target.result, nombre: inp.files[0].name });
+        localStorage.setItem("armario2", JSON.stringify(armario));
+        // Mostrar inmediatamente en el slot
+        document.getElementById(`slot-${tipoNuevaPrenda}`).src = e.target.result;
+        inp.value = "";
+        renderArmario();
+    };
+    r.readAsDataURL(inp.files[0]);
+}
+
+function eliminarPrenda(i) {
+    armario.splice(i, 1);
+    localStorage.setItem("armario2", JSON.stringify(armario));
+    renderArmario();
+}
+
+function renderArmario() {
+    const b = document.getElementById('log-armario');
+    if (!armario.length) { b.innerHTML = '<p class="empty">Armario vacío 👗 Toca el + en cada categoría</p>'; return; }
+    b.innerHTML = armario.map((p, i) => `
+        <div class="wardrobe-item">
+            <span><b>${p.tipo.toUpperCase()}:</b> ${p.nombre.substring(0,20)}</span>
+            <span style="cursor:pointer;color:var(--accent);" onclick="eliminarPrenda(${i})">🗑</span>
+        </div>
+    `).join('');
+}
+
+function armarOutfit() {
+    if (armario.length < 2) { alert("Agrega al menos 2 prendas tocando el + 😊"); return; }
+    const grupos = { arriba: [], abajo: [], zapatos: [], accesorio: [] };
+    armario.forEach(p => { if (grupos[p.tipo]) grupos[p.tipo].push(p); });
+    ['arriba','abajo','zapatos','accesorio'].forEach(s => {
+        if (grupos[s].length) {
+            const pick = grupos[s][Math.floor(Math.random() * grupos[s].length)];
+            document.getElementById(`slot-${s}`).src = pick.data;
+        }
+    });
+}
+
+// ── LISTAS GENÉRICAS ──
+const LISTA_CONFIG = {
+    deseos:   { inputId: 'input-deseos',   contenedorId: 'lista-deseos',   prefijo: '🧜', key: 'deseos',   arr: () => deseos },
+    momentos: { inputId: 'input-momentos', contenedorId: 'lista-momentos', prefijo: '🍿', key: 'momentos', arr: () => momentos },
+    ruleta:   { inputId: 'input-ruleta',   contenedorId: 'lista-ruleta',   prefijo: '🎡', key: 'ruleta',   arr: () => ruletaItems },
+    sorpresa: { inputId: 'input-sorpresa', contenedorId: 'lista-sorpresa', prefijo: '🎁', key: 'sorpresa', arr: () => sorpresas },
+};
+
+function agregarLista(tipo) {
+    const cfg = LISTA_CONFIG[tipo];
+    const inp = document.getElementById(cfg.inputId);
+    const val = inp.value.trim();
+    if (!val) { alert("¡No dejes el campo vacío! 😊"); return; }
+    cfg.arr().push(val);
+    localStorage.setItem(cfg.key, JSON.stringify(cfg.arr()));
+    inp.value = "";
+    renderLista(tipo);
+}
+
+function eliminarDeLista(tipo, i) {
+    const cfg = LISTA_CONFIG[tipo];
+    cfg.arr().splice(i, 1);
+    localStorage.setItem(cfg.key, JSON.stringify(cfg.arr()));
+    renderLista(tipo);
+}
+
+function renderLista(tipo) {
+    const cfg = LISTA_CONFIG[tipo];
+    const c = document.getElementById(cfg.contenedorId);
+    const arr = cfg.arr();
+    if (!arr.length) { c.innerHTML = '<p class="empty">Lista vacía. ¡Añade algo arriba! ✨</p>'; return; }
+    c.innerHTML = arr.map((item, i) => `
+        <div class="list-item">
+            <span>${cfg.prefijo} ${item}</span>
+            <button class="list-del" onclick="eliminarDeLista('${tipo}', ${i})">✕</button>
+        </div>
+    `).join('');
+}
+
+// ── RULETA ──
+function girarRuleta() {
+    if (!ruletaItems.length) { alert("¡Agrega opciones primero! 🍕🎬"); return; }
+    const caja = document.getElementById('resultado-ruleta');
+    let n = 0;
+    const t = setInterval(() => {
+        caja.textContent = `⏳ ${ruletaItems[Math.floor(Math.random() * ruletaItems.length)]}`;
+        if (++n > 14) { clearInterval(t); caja.textContent = `✨ ¡${ruletaItems[Math.floor(Math.random() * ruletaItems.length)]}! ✨`; }
+    }, 100);
+}
+
+// ── V o R ──
+function mostrarVoR(tipo) {
+    const list = tipo === 'verdad' ? VERDADES : RETOS;
+    document.getElementById('caja-vor').textContent = list[Math.floor(Math.random() * list.length)];
+}
+
+// ── ÁNIMO ──
+function evaluarAnimo() {
+    const v = document.getElementById('select-animo').value;
+    const c = document.getElementById('caja-animo');
+    const msgs = {
+        feliz: "¡Me encanta verte así, mi reina! Tu felicidad ilumina mi mundo entero. ☀️🌸",
+        cansada: "Sé que trabajas y estudias durísimo. Descansa y recuerda que estoy orgulloso de ti. 💤❤️‍🩹",
+        triste: "Quisiera estar ahí para darte un abrazo rompe-costillas. Eres lo más lindo que tengo. 🌧️❤️‍🩹",
+        estresada: "Respira profundo, amor. Todo va a salir bien, eres inteligente y capaz. ¡Tú puedes! 🔥🥰",
+        enamorada: "¡Yo estoy mil veces más enamorado de ti, mi monita hermosa! Gracias por existir. ❤️‍🩹"
+    };
+    c.textContent = v ? msgs[v] : "Selecciona arriba cómo va tu día... ❤️‍🩹";
+}
+
+// ── BESOS ──
+function lanzarDado() {
+    const dado = document.getElementById('dado');
+    const result = document.getElementById('resultado-beso');
+    let n = 0;
+    const t = setInterval(() => {
+        dado.style.transform = `rotate(${Math.random()*360}deg) scale(1.1)`;
+        if (++n > 12) {
+            clearInterval(t);
+            dado.style.transform = 'rotate(0deg) scale(1)';
+            result.textContent = BESOS[Math.floor(Math.random() * BESOS.length)];
+        }
+    }, 80);
+}
+
+// ── SORPRESA ──
+function abrirSorpresa() {
+    const fuente = sorpresas.length ? sorpresas : SORPRESAS_DEF;
+    const res = document.getElementById('resultado-sorpresa');
+    let n = 0;
+    const t = setInterval(() => {
+        res.style.display = 'flex';
+        res.textContent = fuente[Math.floor(Math.random() * fuente.length)];
+        if (++n > 8) { clearInterval(t); }
+    }, 120);
+}
+
+// ── CANCIONES YOUTUBE ──
+function extraerYTId(url) {
+    const m = url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([a-zA-Z0-9_-]{11})/);
+    return m ? m[1] : null;
+}
+
+function agregarCancion() {
+    const nombre = document.getElementById('input-cancion-nombre').value.trim();
+    const url = document.getElementById('input-cancion-url').value.trim();
+    if (!nombre || !url) { alert("Pon el nombre y el link de YouTube 🎵"); return; }
+    const vid = extraerYTId(url);
+    if (!vid) {
+        alert("Link de YouTube no válido 😅\nEjemplo:\nhttps://youtube.com/watch?v=xxxxx\n\nAsegúrate de copiar el link completo.");
+        return;
+    }
+    cancionesSpotify.push({ nombre, vid });
+    localStorage.setItem("cancionesSpotify", JSON.stringify(cancionesSpotify));
+    document.getElementById('input-cancion-nombre').value = "";
+    document.getElementById('input-cancion-url').value = "";
+    renderCanciones();
+}
+
+function eliminarCancion(i) {
+    cancionesSpotify.splice(i, 1);
+    localStorage.setItem("cancionesSpotify", JSON.stringify(cancionesSpotify));
+    renderCanciones();
+}
+
+function toggleCancion(i) {
+    const card = document.getElementById(`song-card-${i}`);
+    const frame = document.getElementById(`yt-frame-${i}`);
+    const isOpen = card.classList.contains('open');
+    
+    document.querySelectorAll('.song-card').forEach(c => {
+        c.classList.remove('open');
+        const f = c.querySelector('iframe');
+        if (f) f.src = '';
+    });
+    
+    if (!isOpen) {
+        card.classList.add('open');
+        frame.src = `https://www.youtube.com/embed/${cancionesSpotify[i].vid}?autoplay=1&enablejsapi=1&origin=${window.location.origin}`;
+    }
+}
+
+function renderCanciones() {
+    const c = document.getElementById('lista-canciones-yt');
+    if (!cancionesSpotify.length) {
+        c.innerHTML = '<p class="empty" style="text-align:center; padding:20px;">Agrega canciones de YouTube arriba 🎵<br><br>Canción → Compartir → Copiar enlace</p>';
+        return;
+    }
+    c.innerHTML = cancionesSpotify.map((s, i) => `
+        <div class="song-card" id="song-card-${i}">
+            <div class="song-card-header" onclick="toggleCancion(${i})">
+                <div style="font-size:24px;">🎵</div>
+                <div class="song-info">
+                    <div class="song-title">${s.nombre}</div>
+                    <div class="song-sub">Toca para reproducir interno</div>
+                </div>
+                <div class="song-actions">
+                    <button class="play-btn">▶</button>
+                    <button class="play-btn" style="background:#ff0000; margin-right:5px;" onclick="event.stopPropagation(); window.open('https://www.youtube.com/watch?v=${s.vid}', '_blank')">📺</button>
+                    <button class="list-del" onclick="event.stopPropagation(); eliminarCancion(${i})">✕</button>
+                </div>
+            </div>
+            <iframe class="yt-frame" id="yt-frame-${i}"
+                src=""
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    `).join('');
+}
+
+// ── MENSAJE COMPARTIDO (novia → joel) ──
+function abrirModalPin() {
+    document.getElementById('modal-pin').classList.add('open');
+    setTimeout(() => document.getElementById('input-pin').focus(), 200);
+}
+
+function cerrarModal() {
+    document.getElementById('modal-pin').classList.remove('open');
+    document.getElementById('input-pin').value = '';
+}
+
+function verificarPin() {
+    const pin = document.getElementById('input-pin').value;
+    if (pin === PIN_CORRECTO) {
+        cerrarModal();
+        const msgActual = localStorage.getItem("msg_novia") || "";
+        document.getElementById('textarea-msg-novia').value = msgActual;
+        document.getElementById('modal-escribir').classList.add('open');
+    } else {
+        document.getElementById('input-pin').value = '';
+        document.getElementById('input-pin').style.borderColor = '#ff4d6d';
+        setTimeout(() => document.getElementById('input-pin').style.borderColor = '', 1000);
+        alert("PIN incorrecto 💔\nPídele el PIN a Joel");
+    }
+}
+
+function cerrarModalEscribir() {
+    document.getElementById('modal-escribir').classList.remove('open');
+}
+
+function guardarMsgNovia() {
+    const msg = document.getElementById('textarea-msg-novia').value.trim();
+    if (!msg) { alert("¡Escribe algo primero! 💕"); return; }
+    const fecha = new Date().toLocaleString('es-CO', { hour12: true, day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+    localStorage.setItem("msg_novia", msg);
+    localStorage.setItem("msg_novia_fecha", fecha);
+    cerrarModalEscribir();
+    renderMsgNovia();
+    alert("¡Mensaje enviado con todo mi amor! 💕❤️‍🩹");
+}
+
+function renderMsgNovia() {
+    const msg = localStorage.getItem("msg_novia");
+    const fecha = localStorage.getItem("msg_novia_fecha");
+    const caja = document.getElementById('display-msg-novia');
+    const fechaDiv = document.getElementById('msg-novia-fecha');
+    if (msg) {
+        caja.textContent = msg;
+        fechaDiv.innerHTML = fecha ? `<span class="from-badge">💌 Tu reina escribió esto · ${fecha}</span>` : '';
+    } else {
+        caja.textContent = "Tu reina aún no ha escrito nada... ¡pero pronto llegará su mensaje! 💕";
+        fechaDiv.innerHTML = '';
+    }
+}
+
+// ── TITLE ANIMATION ──
+setInterval(() => {
+    const t = document.getElementById('app-title');
+    if (t) t.textContent = t.textContent.includes('❤️') ? '🌸 Para Mi Reina Hermosa 🌸' : '❤️‍🩹 Para Mi Reina Hermosa ❤️‍🩹';
+}, 1200);
+
+// ── INIT ──
+window.onload = () => {
+    if (localStorage.getItem("dark") === "1") document.body.classList.add('dark');
+
+    const carta = localStorage.getItem("carta") || CARTA_DEF;
+    document.getElementById('vista-carta').textContent = carta;
+    document.getElementById('textarea-carta').value = carta;
+
+    actualizarDias();
+    setInterval(actualizarDias, 60000);
+
+    renderDiario();
+    renderFotos();
+    renderArmario();
+    renderMetas();
+    renderLista('deseos');
+    renderLista('momentos');
+    renderLista('ruleta');
+    renderLista('sorpresa');
+    renderCanciones();
+    renderMsgNovia();
+};
+</script>
+</body>
+</html>
